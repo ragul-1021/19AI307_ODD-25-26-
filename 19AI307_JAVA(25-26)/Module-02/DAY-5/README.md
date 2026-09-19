@@ -27,8 +27,8 @@ To write a Java program that demonstrates returning the current object using thi
  ```
 /*
 Program to implement a Access Modifiers using Java
-Developed by: Nikshitha G
-RegisterNumber: 212223110031
+Developed by: RAGUL B
+RegisterNumber: 212225240112
 */
 ```
 
