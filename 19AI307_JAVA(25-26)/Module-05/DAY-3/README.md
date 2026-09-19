@@ -1,91 +1,72 @@
-# Ex.No:2(C) ACCESS SPECIFIERS
-
+# Ex.No:5(C)  FILE HANDLING USING JAVA
 ## QUESTION:
-Write a Java program to create a class called Person with private instance variables name, age. and country. Provide public getter and setter methods to access and modify these variables.
+Write a program to overwrite the content of a file.
 
 ## AIM:
-To write a Java program that defines a class Person with private instance variables name, age, and country, and to provide public getter and setter methods to access and modify these variables.
+
+To write a Java program to overwrite the content of a file using FileWriter.
 
 ## ALGORITHM :
+
 1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Create a class named Person.
-4. Declare private instance variables:</br>
-     - name (String)</br>
-     - age (int)</br>
-     - country (String)</br>
-5. Define public setter methods to assign values to each variable.
-6. Define public getter methods to retrieve the values of each variable.
-7. In the main method:</br>
-     - Create an object of the Person class.</br>
-     - Use setter methods to set name, age, and country.</br>
-     - Use getter methods to display the values.</br>
+
+2. Import required classes (FileWriter, Scanner).
+
+3. Take input content from the user.
+
+4. Create a FileWriter object for the file (output.txt).
+
+5. Write the input content into the file (overwrite mode).
+
+6. Close the file writer.
+
+7. Display success message.
+
 8. End the program.
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Access Specifiers using Java
+Program to implement a File Handling using Java
 Developed by: Nikshitha G
 RegisterNumber: 212223110031
 */
 ```
 
 ## SOURCE CODE:
-```java
-import java.util.*;
-class Person
-{
-    private String name;
-    private int age;
-    private String country;  
-    public String getName()
-    {
-        return name;
-    }
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-    public int getAge()
-    {
-        return age;
-    }
-    public void setAge(int age)
-    {
-        this.age = age;
-    }
-    public String getCountry()
-    {
-        return country;
-    }
-    public void setCountry(String country)
-    {
-        this.country = country;
-    }
-}
-public class prog
-{
-    public static void main(String[] args)
-    {
+
+```
+import java.io.FileWriter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Person obj = new Person();
-        obj.setName(sc.nextLine());
-        obj.setAge(sc.nextInt());
-        obj.setCountry(sc.nextLine());
-        System.out.println("Person 1");
-        System.out.println("Name: " + obj.getName());
-        System.out.println("Age: " + obj.getAge());
-        System.out.println("Country: " + obj.getCountry());
+
+        String content = sc.nextLine();
+
+        try {
+            // Overwrite mode (default behavior)
+            FileWriter fw = new FileWriter("output.txt");
+            fw.write(content);
+            fw.close();
+
+            System.out.println("File content overwritten successfully.");
+        } catch (Exception e) {
+            System.out.println("Error occurred while writing file.");
+        }
+
+        sc.close();
     }
 }
+
 ```
 
 
 ## OUTPUT:
-<img width="648" height="365" alt="image" src="https://github.com/user-attachments/assets/f3c1492f-5d1b-46b1-9d1d-726b7822232e" />
 
+<img width="894" height="173" alt="image" src="https://github.com/user-attachments/assets/9d1217cc-2a94-4479-8787-d3f4e0adc3d3" />
 
 ## RESULT:
-The program successfully creates a Person class with private variables and accesses them using getter and setter methods, demonstrating encapsulation in Java.
+The program successfully overwrites the existing content of a file named output.txt with new user-provided data using FileWriter.
