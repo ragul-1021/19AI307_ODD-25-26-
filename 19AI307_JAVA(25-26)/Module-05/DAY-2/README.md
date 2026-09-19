@@ -1,63 +1,125 @@
-# Ex.No:2(B) METHODS
+# Ex.No:5(B) SERIALIZATION AND DESERIALIZATION 
 
 ## QUESTION:
-Write a method int cube(int x) that calls a method int square(int x) internally to calculate the cube as x * square(x).
+Write a Java program to serialize a collection of objects (like ArrayList<Student>) into a file.
 
 ## AIM:
-To write a Java program that defines a method cube(int x) which internally calls another method square(int x) to compute the cube of a number using the formula: cube = x * square(x).
+To write a Java program to serialize a collection of objects (ArrayList of Student) into a file and then deserialize the objects back from the file.
 
 ## ALGORITHM :
 1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Create a method square(int x) that returns the value of x * x.
-4. Create another method cube(int x) that:</BR>
-     - Calls square(x)</BR>
-     - Multiplies the result by x</BR>
-     - Returns the final cube value.</BR>
-5. In the main method:</BR>
-     - Read or assign a value for x</BR>
-     - Call the cube(x) method</BR>
-6. Display the cube.
-7. End the program.
 
+2. Create a Student class that implements Serializable.
 
+3. Create an ArrayList to store Student objects.
+
+4. Read number of students from the user.
+
+5. Input student details (id, name, marks) and store them in the list.
+
+6. Serialize the list using ObjectOutputStream into a file (students.dat).
+
+7. Deserialize the list using ObjectInputStream.
+
+8. Display the deserialized student objects.
+
+9. End the program.
 
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Methods using Java
+Program to implement a Serialization and Deserialization using Java
 Developed by: Nikshitha G
 RegisterNumber: 212223110031
-
 */
 ```
 
 ## SOURCE CODE:
+
 ```
+import java.io.*;
 import java.util.*;
-public class Main
-{
-    static int square(int x)
-    {
-        return x*x;
+
+// Student class must implement Serializable
+class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private int id;
+    private String name;
+    private double marks;
+
+    public Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
     }
-    static int cube(int x)
-    {
-        return x*square(x);
+
+    @Override
+    public String toString() {
+        return "Student{id=" + id + ", name='" + name + "', marks=" + marks + "}";
     }
-    public static void main(String[] args)
-    {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        System.out.println(cube(n));
+}
+
+public class StudentSerializationUserInput {
+
+    public static void serializeStudents(List<Student> students, String fileName) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(students);
+            System.out.println("Students serialized successfully into: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Error during serialization: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Student> deserializeStudents(String fileName) {
+        List<Student> students = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+            students = (List<Student>) ois.readObject();
+            System.out.println("Students deserialized successfully from: " + fileName);
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error during deserialization: " + e.getMessage());
+        }
+        return students;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Student> students = new ArrayList<>();
+
+        int n = scanner.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            int id = scanner.nextInt();
+            String name = scanner.next();
+            double marks = scanner.nextDouble();
+
+            students.add(new Student(id, name, marks));
+        }
+
+        String fileName = "students.dat";
+
+        serializeStudents(students, fileName);
+
+        List<Student> deserializedStudents = deserializeStudents(fileName);
+
+        if (deserializedStudents != null) {
+            System.out.println("\nDeserialized Students:");
+            for (Student s : deserializedStudents) {
+                System.out.println(s);
+            }
+        }
+
+        scanner.close();
     }
 }
 ```
 
 
 ## OUTPUT:
-<img width="282" height="90" alt="image" src="https://github.com/user-attachments/assets/0c98b161-ebf9-4ee6-92cc-084d1e4c1829" />
+
+<img width="941" height="352" alt="image" src="https://github.com/user-attachments/assets/f28a66bf-3b61-4ab7-bb9e-15096dc4d9d3" />
 
 ## RESULT:
-The program successfully calculates the cube of a given number by calling the square() method from within the cube() method, demonstrating method calling and reuse in Java.
+The Java program successfully serializes an ArrayList of Student objects into a file named students.dat and then deserializes the objects back, displaying the stored student details.
