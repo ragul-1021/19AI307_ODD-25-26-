@@ -28,8 +28,8 @@ To write a java program to reverse an array
 ## PROGRAM:
  ```
 Program to implement a Array concept using Java
-Developed by: P PARTHIBAN
-Register Number: 212223230145
+Developed by: B RAGUL 
+Register Number: 212225240112
 ```
 
 ## SOURCE CODE:
