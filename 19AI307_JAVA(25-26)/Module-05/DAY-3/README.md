@@ -29,8 +29,8 @@ To write a Java program to overwrite the content of a file using FileWriter.
  ```
 /*
 Program to implement a File Handling using Java
-Developed by: Nikshitha G
-RegisterNumber: 212223110031
+Developed by: RAGUL B
+RegisterNumber: 212225240112
 */
 ```
 
